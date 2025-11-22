@@ -1,0 +1,44 @@
+{
+  "name": "@template/cluster-client",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "The cluster-client template",
+  "repository": {
+    "type": "git",
+    "url": "<PLACEHOLDER>",
+    "directory": "packages/cluster_client"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "scripts": {
+    "dev": "bun --watch src/client.ts",
+    "codegen": "build-utils prepare-v2",
+    "build": "bun build --target=bun --minify --outfile ./dist/bundle.js src/client.ts",
+    "check": "tsc -b tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "@effect/cluster": "^0.52.11",
+    "@effect/platform": "^0.93.3",
+    "@effect/platform-bun": "latest",
+    "@effect/rpc": "^0.72.1",
+    "@template/domain": "workspace:*",
+    "effect": "latest"
+  },
+  "effect": {
+    "generateExports": {
+      "include": [
+        "**/*.ts"
+      ]
+    },
+    "generateIndex": {
+      "include": [
+        "**/*.ts"
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+services:
+  client:
+    image: cluster-client:latest
+    environment:
+      DB_URL: "postgresql://admin:admin@db:5432/base"
+  runner:
+    image: runner:latest
+    deploy:
+      replicas: 5
+    environment:
+      DB_URL: "postgresql://admin:admin@db:5432/base"
+  db:
+    container_name: db
+    image: postgres:18.1-alpine3.21
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: base
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

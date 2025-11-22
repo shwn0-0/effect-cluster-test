@@ -1,0 +1,44 @@
+{
+  "name": "@template/runner",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "The runner template",
+  "repository": {
+    "type": "git",
+    "url": "<PLACEHOLDER>",
+    "directory": "packages/runner"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "scripts": {
+    "dev": "bun --watch src/runner.ts",
+    "codegen": "build-utils prepare-v2",
+    "build": "bun build --target=bun --minify ./src/runner.ts --outfile ./dist/bundle.js",
+    "build-docker": "docker build . -t runner",
+    "check": "tsc -b tsconfig.json",
+    "test": "vitest",
+    "coverage": "vitest --coverage"
+  },
+  "dependencies": {
+    "@effect/platform": "^0.93.3",
+    "@effect/platform-bun": "latest",
+    "@effect/sql": "^0.48.0",
+    "@template/domain": "workspace:*",
+    "effect": "latest"
+  },
+  "effect": {
+    "generateExports": {
+      "include": [
+        "**/*.ts"
+      ]
+    },
+    "generateIndex": {
+      "include": [
+        "**/*.ts"
+      ]
+    }
+  }
+}
