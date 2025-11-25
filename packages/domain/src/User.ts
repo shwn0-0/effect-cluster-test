@@ -26,6 +26,7 @@ export class UserEntityError extends Schema.TaggedError<UserEntityError>(
 }) {}
 
 export const UserEntity = Entity.make("UserEntity", [
+  Rpc.make("Ping"),
   Rpc.make("CreateUser", {
     payload: User.pipe(Schema.omit("id")),
     success: User,

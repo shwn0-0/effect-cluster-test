@@ -17,8 +17,6 @@ const program = Effect.gen(function* () {
     name: "Bob Jones",
   });
 
-  yield* Effect.log("Created Bob Jones");
-
   const user2 = yield* client.CreateUser({
     email: User.Email.make("Test2@Test.com"),
     name: "Ann Jones",
@@ -53,6 +51,11 @@ const program = Effect.gen(function* () {
   yield* client.DeleteUserById({ id: user1.id });
   users = yield* client.GetUsers();
   yield* Effect.log(users);
+
+  yield* client.Ping().pipe(
+    Effect.tap(() => Effect.log("Pinging")),
+    Effect.forever,
+  );
 }).pipe(Effect.catchAll((e) => Effect.logError(e)));
 
 const ClientRuntime = BunClusterSocket.layer({

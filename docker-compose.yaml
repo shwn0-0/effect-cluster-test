@@ -3,6 +3,8 @@ services:
     image: cluster-client:latest
     environment:
       DB_URL: "postgresql://admin:admin@db:5432/base"
+    deploy:
+      replicas: 10
   runner:
     image: runner:latest
     deploy:

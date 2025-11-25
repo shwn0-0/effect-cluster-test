@@ -8,6 +8,7 @@ export const UserEntityLive = User.UserEntity.toLayer(
     yield* sql`CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY DEFAULT uuidv4(), name TEXT, email TEXT);`;
 
     return User.UserEntity.of({
+      Ping: () => Effect.log("Pong"),
       CreateUser: ({ payload }) =>
         pipe(
           sql<User.User>`INSERT INTO users ${sql.insert(payload)} RETURNING *;`,
